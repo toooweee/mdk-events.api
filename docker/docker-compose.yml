@@ -9,5 +9,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql
 
+  minio:
+    image: quay.io/minio/minio:RELEASE.2023-09-07T02-05-02Z
+    restart: unless-stopped
+    command: server /data --address ":9900" --console-address ":9091"
+    ports:
+      - "9900:9900"
+      - "9091:9091"
+    env_file:
+      - ../.env
+    volumes:
+      - minio_data:/data
+
 volumes:
   postgres_data:
+  minio_data:
