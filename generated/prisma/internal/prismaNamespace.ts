@@ -389,7 +389,8 @@ export const ModelName = {
   Token: 'Token',
   Organization: 'Organization',
   EventRegistration: 'EventRegistration',
-  Event: 'Event'
+  Event: 'Event',
+  PublicFile: 'PublicFile'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -405,7 +406,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userSubscription" | "token" | "organization" | "eventRegistration" | "event"
+    modelProps: "user" | "userSubscription" | "token" | "organization" | "eventRegistration" | "event" | "publicFile"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -853,6 +854,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PublicFile: {
+      payload: Prisma.$PublicFilePayload<ExtArgs>
+      fields: Prisma.PublicFileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PublicFileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicFilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PublicFileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicFilePayload>
+        }
+        findFirst: {
+          args: Prisma.PublicFileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicFilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PublicFileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicFilePayload>
+        }
+        findMany: {
+          args: Prisma.PublicFileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicFilePayload>[]
+        }
+        create: {
+          args: Prisma.PublicFileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicFilePayload>
+        }
+        createMany: {
+          args: Prisma.PublicFileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PublicFileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicFilePayload>[]
+        }
+        delete: {
+          args: Prisma.PublicFileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicFilePayload>
+        }
+        update: {
+          args: Prisma.PublicFileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicFilePayload>
+        }
+        deleteMany: {
+          args: Prisma.PublicFileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PublicFileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PublicFileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicFilePayload>[]
+        }
+        upsert: {
+          args: Prisma.PublicFileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicFilePayload>
+        }
+        aggregate: {
+          args: Prisma.PublicFileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePublicFile>
+        }
+        groupBy: {
+          args: Prisma.PublicFileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PublicFileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PublicFileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PublicFileCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -927,6 +1002,7 @@ export type TokenScalarFieldEnum = (typeof TokenScalarFieldEnum)[keyof typeof To
 export const OrganizationScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -945,6 +1021,7 @@ export type EventRegistrationScalarFieldEnum = (typeof EventRegistrationScalarFi
 export const EventScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  description: 'description',
   places: 'places',
   organizationId: 'organizationId',
   createdAt: 'createdAt',
@@ -952,6 +1029,19 @@ export const EventScalarFieldEnum = {
 } as const
 
 export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+export const PublicFileScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  url: 'url',
+  urlExpo: 'urlExpo',
+  organizationId: 'organizationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PublicFileScalarFieldEnum = (typeof PublicFileScalarFieldEnum)[keyof typeof PublicFileScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1154,6 +1244,7 @@ export type GlobalOmitConfig = {
   organization?: Prisma.OrganizationOmit
   eventRegistration?: Prisma.EventRegistrationOmit
   event?: Prisma.EventOmit
+  publicFile?: Prisma.PublicFileOmit
 }
 
 /* Types for Logging */

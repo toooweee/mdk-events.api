@@ -47,3 +47,8 @@ export type EventRegistration = Prisma.EventRegistrationModel
  * 
  */
 export type Event = Prisma.EventModel
+/**
+ * Model PublicFile
+ * 
+ */
+export type PublicFile = Prisma.PublicFileModel

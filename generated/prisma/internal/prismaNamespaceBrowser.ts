@@ -56,7 +56,8 @@ export const ModelName = {
   Token: 'Token',
   Organization: 'Organization',
   EventRegistration: 'EventRegistration',
-  Event: 'Event'
+  Event: 'Event',
+  PublicFile: 'PublicFile'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -110,6 +111,7 @@ export type TokenScalarFieldEnum = (typeof TokenScalarFieldEnum)[keyof typeof To
 export const OrganizationScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -128,6 +130,7 @@ export type EventRegistrationScalarFieldEnum = (typeof EventRegistrationScalarFi
 export const EventScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  description: 'description',
   places: 'places',
   organizationId: 'organizationId',
   createdAt: 'createdAt',
@@ -135,6 +138,19 @@ export const EventScalarFieldEnum = {
 } as const
 
 export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+export const PublicFileScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  url: 'url',
+  urlExpo: 'urlExpo',
+  organizationId: 'organizationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PublicFileScalarFieldEnum = (typeof PublicFileScalarFieldEnum)[keyof typeof PublicFileScalarFieldEnum]
 
 
 export const SortOrder = {

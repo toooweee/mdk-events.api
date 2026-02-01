@@ -13,7 +13,6 @@ export const envSchema = z.object({
 
   MINIO_ENDPOINT: z.string(),
   MINIO_PUBLIC_BUCKET: z.string(),
-  MINIO_PRIVATE_BUCKET: z.string(),
   MINIO_REGION_NAME: z.string(),
   MINIO_ROOT_USER: z.string(),
   MINIO_ROOT_PASSWORD: z.string(),

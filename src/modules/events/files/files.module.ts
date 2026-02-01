@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { EnvService } from '@/src/infra/env/env.service';
-import { getAwsConfig } from '@/src/modules/files/aws.config';
 import { EnvModule } from '@/src/infra/env/env.module';
-import { FilesService } from '@/src/modules/files/files.service';
+import { getAwsConfig } from '@/src/modules/events/files/aws.config';
+import { FilesService } from '@/src/modules/events/files/files.service';
+import { PrismaModule } from '@/src/infra/prisma/prisma.module';
 
 @Module({
-  imports: [EnvModule],
+  imports: [EnvModule, PrismaModule],
   providers: [
     {
       provide: 'S3_CLIENT',

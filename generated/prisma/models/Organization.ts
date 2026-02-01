@@ -27,6 +27,7 @@ export type AggregateOrganization = {
 export type OrganizationMinAggregateOutputType = {
   id: string | null
   name: string | null
+  description: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -34,6 +35,7 @@ export type OrganizationMinAggregateOutputType = {
 export type OrganizationMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  description: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -41,6 +43,7 @@ export type OrganizationMaxAggregateOutputType = {
 export type OrganizationCountAggregateOutputType = {
   id: number
   name: number
+  description: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -50,6 +53,7 @@ export type OrganizationCountAggregateOutputType = {
 export type OrganizationMinAggregateInputType = {
   id?: true
   name?: true
+  description?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -57,6 +61,7 @@ export type OrganizationMinAggregateInputType = {
 export type OrganizationMaxAggregateInputType = {
   id?: true
   name?: true
+  description?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -64,6 +69,7 @@ export type OrganizationMaxAggregateInputType = {
 export type OrganizationCountAggregateInputType = {
   id?: true
   name?: true
+  description?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -144,6 +150,7 @@ export type OrganizationGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 export type OrganizationGroupByOutputType = {
   id: string
   name: string
+  description: string
   createdAt: Date
   updatedAt: Date
   _count: OrganizationCountAggregateOutputType | null
@@ -172,19 +179,23 @@ export type OrganizationWhereInput = {
   NOT?: Prisma.OrganizationWhereInput | Prisma.OrganizationWhereInput[]
   id?: Prisma.StringFilter<"Organization"> | string
   name?: Prisma.StringFilter<"Organization"> | string
+  description?: Prisma.StringFilter<"Organization"> | string
   createdAt?: Prisma.DateTimeFilter<"Organization"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Organization"> | Date | string
   subscribers?: Prisma.UserSubscriptionListRelationFilter
   events?: Prisma.EventListRelationFilter
+  photo?: Prisma.XOR<Prisma.PublicFileNullableScalarRelationFilter, Prisma.PublicFileWhereInput> | null
 }
 
 export type OrganizationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   subscribers?: Prisma.UserSubscriptionOrderByRelationAggregateInput
   events?: Prisma.EventOrderByRelationAggregateInput
+  photo?: Prisma.PublicFileOrderByWithRelationInput
 }
 
 export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -193,15 +204,18 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.OrganizationWhereInput | Prisma.OrganizationWhereInput[]
   OR?: Prisma.OrganizationWhereInput[]
   NOT?: Prisma.OrganizationWhereInput | Prisma.OrganizationWhereInput[]
+  description?: Prisma.StringFilter<"Organization"> | string
   createdAt?: Prisma.DateTimeFilter<"Organization"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Organization"> | Date | string
   subscribers?: Prisma.UserSubscriptionListRelationFilter
   events?: Prisma.EventListRelationFilter
+  photo?: Prisma.XOR<Prisma.PublicFileNullableScalarRelationFilter, Prisma.PublicFileWhereInput> | null
 }, "id" | "name">
 
 export type OrganizationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.OrganizationCountOrderByAggregateInput
@@ -215,6 +229,7 @@ export type OrganizationScalarWhereWithAggregatesInput = {
   NOT?: Prisma.OrganizationScalarWhereWithAggregatesInput | Prisma.OrganizationScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Organization"> | string
   name?: Prisma.StringWithAggregatesFilter<"Organization"> | string
+  description?: Prisma.StringWithAggregatesFilter<"Organization"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Organization"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Organization"> | Date | string
 }
@@ -222,42 +237,51 @@ export type OrganizationScalarWhereWithAggregatesInput = {
 export type OrganizationCreateInput = {
   id?: string
   name: string
+  description: string
   createdAt?: Date | string
   updatedAt?: Date | string
   subscribers?: Prisma.UserSubscriptionCreateNestedManyWithoutOrganizationInput
   events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+  photo?: Prisma.PublicFileCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateInput = {
   id?: string
   name: string
+  description: string
   createdAt?: Date | string
   updatedAt?: Date | string
   subscribers?: Prisma.UserSubscriptionUncheckedCreateNestedManyWithoutOrganizationInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+  photo?: Prisma.PublicFileUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscribers?: Prisma.UserSubscriptionUpdateManyWithoutOrganizationNestedInput
   events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+  photo?: Prisma.PublicFileUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscribers?: Prisma.UserSubscriptionUncheckedUpdateManyWithoutOrganizationNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
+  photo?: Prisma.PublicFileUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateManyInput = {
   id?: string
   name: string
+  description: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -265,6 +289,7 @@ export type OrganizationCreateManyInput = {
 export type OrganizationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -272,6 +297,7 @@ export type OrganizationUpdateManyMutationInput = {
 export type OrganizationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -284,6 +310,7 @@ export type OrganizationScalarRelationFilter = {
 export type OrganizationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -291,6 +318,7 @@ export type OrganizationCountOrderByAggregateInput = {
 export type OrganizationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -298,6 +326,7 @@ export type OrganizationMaxOrderByAggregateInput = {
 export type OrganizationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -330,20 +359,38 @@ export type OrganizationUpdateOneRequiredWithoutEventsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutEventsInput, Prisma.OrganizationUpdateWithoutEventsInput>, Prisma.OrganizationUncheckedUpdateWithoutEventsInput>
 }
 
+export type OrganizationCreateNestedOneWithoutPhotoInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutPhotoInput, Prisma.OrganizationUncheckedCreateWithoutPhotoInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutPhotoInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutPhotoNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutPhotoInput, Prisma.OrganizationUncheckedCreateWithoutPhotoInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutPhotoInput
+  upsert?: Prisma.OrganizationUpsertWithoutPhotoInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutPhotoInput, Prisma.OrganizationUpdateWithoutPhotoInput>, Prisma.OrganizationUncheckedUpdateWithoutPhotoInput>
+}
+
 export type OrganizationCreateWithoutSubscribersInput = {
   id?: string
   name: string
+  description: string
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+  photo?: Prisma.PublicFileCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSubscribersInput = {
   id?: string
   name: string
+  description: string
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+  photo?: Prisma.PublicFileUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSubscribersInput = {
@@ -365,33 +412,41 @@ export type OrganizationUpdateToOneWithWhereWithoutSubscribersInput = {
 export type OrganizationUpdateWithoutSubscribersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+  photo?: Prisma.PublicFileUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSubscribersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
+  photo?: Prisma.PublicFileUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutEventsInput = {
   id?: string
   name: string
+  description: string
   createdAt?: Date | string
   updatedAt?: Date | string
   subscribers?: Prisma.UserSubscriptionCreateNestedManyWithoutOrganizationInput
+  photo?: Prisma.PublicFileCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEventsInput = {
   id?: string
   name: string
+  description: string
   createdAt?: Date | string
   updatedAt?: Date | string
   subscribers?: Prisma.UserSubscriptionUncheckedCreateNestedManyWithoutOrganizationInput
+  photo?: Prisma.PublicFileUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEventsInput = {
@@ -413,17 +468,77 @@ export type OrganizationUpdateToOneWithWhereWithoutEventsInput = {
 export type OrganizationUpdateWithoutEventsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscribers?: Prisma.UserSubscriptionUpdateManyWithoutOrganizationNestedInput
+  photo?: Prisma.PublicFileUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEventsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscribers?: Prisma.UserSubscriptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  photo?: Prisma.PublicFileUncheckedUpdateOneWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutPhotoInput = {
+  id?: string
+  name: string
+  description: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  subscribers?: Prisma.UserSubscriptionCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutPhotoInput = {
+  id?: string
+  name: string
+  description: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  subscribers?: Prisma.UserSubscriptionUncheckedCreateNestedManyWithoutOrganizationInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutPhotoInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutPhotoInput, Prisma.OrganizationUncheckedCreateWithoutPhotoInput>
+}
+
+export type OrganizationUpsertWithoutPhotoInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutPhotoInput, Prisma.OrganizationUncheckedUpdateWithoutPhotoInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutPhotoInput, Prisma.OrganizationUncheckedCreateWithoutPhotoInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutPhotoInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutPhotoInput, Prisma.OrganizationUncheckedUpdateWithoutPhotoInput>
+}
+
+export type OrganizationUpdateWithoutPhotoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscribers?: Prisma.UserSubscriptionUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutPhotoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscribers?: Prisma.UserSubscriptionUncheckedUpdateManyWithoutOrganizationNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 
@@ -469,16 +584,19 @@ export type OrganizationCountOutputTypeCountEventsArgs<ExtArgs extends runtime.T
 export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   subscribers?: boolean | Prisma.Organization$subscribersArgs<ExtArgs>
   events?: boolean | Prisma.Organization$eventsArgs<ExtArgs>
+  photo?: boolean | Prisma.Organization$photoArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
 
 export type OrganizationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["organization"]>
@@ -486,6 +604,7 @@ export type OrganizationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
 export type OrganizationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["organization"]>
@@ -493,14 +612,16 @@ export type OrganizationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
 export type OrganizationSelectScalar = {
   id?: boolean
   name?: boolean
+  description?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OrganizationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["organization"]>
+export type OrganizationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["organization"]>
 export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subscribers?: boolean | Prisma.Organization$subscribersArgs<ExtArgs>
   events?: boolean | Prisma.Organization$eventsArgs<ExtArgs>
+  photo?: boolean | Prisma.Organization$photoArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -511,10 +632,12 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
   objects: {
     subscribers: Prisma.$UserSubscriptionPayload<ExtArgs>[]
     events: Prisma.$EventPayload<ExtArgs>[]
+    photo: Prisma.$PublicFilePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    description: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["organization"]>
@@ -913,6 +1036,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   readonly [Symbol.toStringTag]: "PrismaPromise"
   subscribers<T extends Prisma.Organization$subscribersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$subscribersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserSubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   events<T extends Prisma.Organization$eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  photo<T extends Prisma.Organization$photoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$photoArgs<ExtArgs>>): Prisma.Prisma__PublicFileClient<runtime.Types.Result.GetResult<Prisma.$PublicFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -944,6 +1068,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
 export interface OrganizationFieldRefs {
   readonly id: Prisma.FieldRef<"Organization", 'String'>
   readonly name: Prisma.FieldRef<"Organization", 'String'>
+  readonly description: Prisma.FieldRef<"Organization", 'String'>
   readonly createdAt: Prisma.FieldRef<"Organization", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Organization", 'DateTime'>
 }
@@ -1379,6 +1504,25 @@ export type Organization$eventsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.EventScalarFieldEnum | Prisma.EventScalarFieldEnum[]
+}
+
+/**
+ * Organization.photo
+ */
+export type Organization$photoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PublicFile
+   */
+  select?: Prisma.PublicFileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PublicFile
+   */
+  omit?: Prisma.PublicFileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PublicFileInclude<ExtArgs> | null
+  where?: Prisma.PublicFileWhereInput
 }
 
 /**
