@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ForbiddenException,
   Injectable,
   NotFoundException,
@@ -79,6 +80,39 @@ export class OrganizationService {
     await this.assertOwner(userId, organizationId);
 
     return this.filesService.uploadPublicFile(file, organizationId);
+  }
+
+  async subscribe(userId: string, organizationId: string) {
+    return this.prisma.userSubscription.create({
+      data: {
+        userId,
+        organizationId,
+      },
+    });
+  }
+
+  async unsubscribe(userId: string, organizationId: string) {
+    const subscribe = await this.prisma.userSubscription.findUnique({
+      where: {
+        userId_organizationId: {
+          userId,
+          organizationId,
+        },
+      },
+    });
+
+    if (subscribe?.role === OrganizationRole.OWNER) {
+      throw new BadRequestException('You cant unsubscribe your organization');
+    }
+
+    return this.prisma.userSubscription.delete({
+      where: {
+        userId_organizationId: {
+          userId,
+          organizationId,
+        },
+      },
+    });
   }
 
   private async assertOwner(userId: string, organizationId: string) {

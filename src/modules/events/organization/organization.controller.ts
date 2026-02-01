@@ -50,10 +50,24 @@ export class OrganizationController {
     return this.organizationService.addPhoto(currentUser.id, id, file);
   }
 
-  // @Post(':id')
-  // async subscribe(@User() currentUser: CurrentUser, @Param('id') id: string) {
-  //   return this.organizationService.subscribe(currentUser.id, id);
-  // }
+  @Patch(':id/membership')
+  async toggleMembership(
+    @Param('id') id: string,
+    @User() currentUser: CurrentUser,
+    @Body() body: { action: 'subscribe' | 'unsubscribe' },
+  ) {
+    if (!['subscribe', 'unsubscribe'].includes(body.action)) {
+      throw new BadRequestException(
+        'action должен быть "subscribe" или "unsubscribe"',
+      );
+    }
+
+    if (body.action === 'subscribe') {
+      return this.organizationService.subscribe(currentUser.id, id);
+    } else {
+      return this.organizationService.unsubscribe(currentUser.id, id);
+    }
+  }
 
   @Patch(':id')
   async update(
