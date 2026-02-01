@@ -12,7 +12,7 @@ model User {
   id                 String              @id @default(uuid())
   email              String              @unique
   password           String
-  name               String
+  name               String?
   token              Token?
   subscriptions      UserSubscription[]
   eventRegistrations EventRegistration[]
@@ -38,10 +38,11 @@ model UserSubscription {
 }
 
 model Token {
-  id     String @id @default(uuid())
-  token  String @unique
-  user   User   @relation(fields: [userId], references: [id])
-  userId String @unique @map("user_id")
+  id        String   @id @default(uuid())
+  token     String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @unique @map("user_id")
+  expiresAt DateTime
 
   @@map("tokens")
 }

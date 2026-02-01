@@ -1,21 +1,24 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import {
-  FastifyAdapter,
-  NestFastifyApplication,
-} from '@nestjs/platform-fastify';
 import { EnvService } from '@/src/infra/env/env.service';
+import cookieParser from 'cookie-parser';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
-    new FastifyAdapter({
-      logger: true,
-    }),
-  );
+  const app = await NestFactory.create(AppModule);
 
   const envService = app.get(EnvService);
 
-  await app.listen({ port: envService.get('PORT'), host: '0.0.0.0' });
+  app.use(cookieParser());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+    }),
+  );
+
+  app.setGlobalPrefix('api');
+
+  await app.listen(envService.get('PORT'), '0.0.0.0');
 }
 bootstrap();

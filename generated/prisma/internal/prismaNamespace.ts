@@ -917,7 +917,8 @@ export type UserSubscriptionScalarFieldEnum = (typeof UserSubscriptionScalarFiel
 export const TokenScalarFieldEnum = {
   id: 'id',
   token: 'token',
-  userId: 'userId'
+  userId: 'userId',
+  expiresAt: 'expiresAt'
 } as const
 
 export type TokenScalarFieldEnum = (typeof TokenScalarFieldEnum)[keyof typeof TokenScalarFieldEnum]
@@ -967,6 +968,14 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 
