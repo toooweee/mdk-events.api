@@ -9,6 +9,7 @@ import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { UpdateOrganizationDto } from './dto/update-organization.dto';
 import { FilesService } from '@/src/modules/events/files/files.service';
 import { OrganizationRole } from '@prisma-client/enums';
+import { Prisma } from '@prisma-client/client';
 
 @Injectable()
 export class OrganizationService {
@@ -17,11 +18,24 @@ export class OrganizationService {
     private readonly filesService: FilesService,
   ) {}
 
-  async findAll() {
+  async findAll(filters: { mine?: boolean; userId?: string } = {}) {
+    const where: Prisma.OrganizationWhereInput = {};
+
+    if (filters.mine && filters.userId) {
+      where.subscribers = {
+        some: {
+          userId: filters.userId,
+          role: OrganizationRole.OWNER,
+        },
+      };
+    }
+
     return this.prisma.organization.findMany({
+      where,
       include: {
         photo: true,
       },
+      orderBy: { createdAt: 'desc' },
     });
   }
 

@@ -81,6 +81,7 @@ model Event {
   name           String              @unique
   description    String
   places         Int
+  date           DateTime
   organization   Organization        @relation(fields: [organizationId], references: [id])
   organizationId String              @map("organization_id")
   registrations  EventRegistration[]

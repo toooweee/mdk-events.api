@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -21,8 +22,16 @@ export class OrganizationController {
   constructor(private readonly organizationService: OrganizationService) {}
 
   @Get()
-  async findAll() {
-    return this.organizationService.findAll();
+  async findAll(
+    @Query('mine') mine?: string,
+    @User() currentUser?: CurrentUser,
+  ) {
+    const isMine = mine === 'true';
+
+    return this.organizationService.findAll({
+      mine: isMine,
+      userId: currentUser?.id,
+    });
   }
 
   @Post()
